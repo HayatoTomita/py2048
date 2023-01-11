@@ -1,0 +1,14 @@
+[tool.poetry]
+name = "py2048"
+version = "0.1.0"
+description = "python 2048 game"
+authors = ["HayatoTomita <nice.to.tom@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
