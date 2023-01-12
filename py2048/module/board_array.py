@@ -18,4 +18,15 @@ def pack(src: np.ndarray, pack_direction: Direction) -> np.ndarray:
     return src[concatenated]
 
 def merge(src:np.ndarray, merge_direction: Direction) -> np.ndarray:
+    if merge_direction == "RIGHT":
+        src = src[::-1]
+    
+    for i in range(len(src) - 1):
+        if src[i] == src[i+1]:
+            src[i] = src[i] * 2
+            src[i + 1] = 0
+    
+    if merge_direction == "RIGHT":
+        src = src[::-1]
+
     return src
