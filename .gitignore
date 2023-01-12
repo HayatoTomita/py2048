@@ -245,4 +245,7 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
+# notebooks
+notebook
+
 # End of https://www.toptal.com/developers/gitignore/api/windows,visualstudiocode,jupyternotebooks,python,vim
