@@ -3,10 +3,6 @@ from typing import Literal
 import numpy as np
 
 
-def add(a, b):
-    return a + b
-
-
 Direction = Literal["LEFT", "RIGHT"]
 
 
