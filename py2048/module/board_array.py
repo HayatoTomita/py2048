@@ -5,7 +5,9 @@ import numpy as np
 Direction = Literal["LEFT", "RIGHT", "TOP", "BOTTOM"]
 
 
-def pack(src: np.ndarray, pack_direction: Direction) -> np.ndarray:
+def pack(
+    src: np.ndarray, pack_direction: Direction, do_check: bool = False
+) -> np.ndarray:
     nonzero = np.nonzero(src)
     zero = np.where(src == 0)
     tmp = (
@@ -14,7 +16,17 @@ def pack(src: np.ndarray, pack_direction: Direction) -> np.ndarray:
         else (zero, nonzero)
     )
     concatenated = np.concatenate(tmp, axis=1)[0]
-    return src[concatenated]
+    result = src[concatenated]
+
+    if not do_check:
+        return result
+
+    if all(src == result):
+        result = np.append(result, 0)
+    else:
+        result = np.append(result, 1)
+
+    return result
 
 
 def merge(src: np.ndarray, merge_direction: Direction) -> np.ndarray:
@@ -42,7 +54,17 @@ def get_spawn_val() -> int:
     return np.random.randint(1, 3) * 2
 
 
-def controll(board: np.ndarray, direction: Direction) -> np.ndarray:
+def check_packed_board(
+    board: np.ndarray, direction: Direction
+) -> tuple[np.ndarray, bool]:
+    if direction == "RIGHT" or direction == "LEFT":
+        check_array = board[:, -1]
+        checked = board[:, :-1]
+    elif direction == "TOP" or direction == "BOTTOM":
+        check_array = board[-1, :]
+        checked = board[:-1, :]
+    return checked, np.sum(check_array) != 0
+
     axis = 0 if direction == "TOP" or direction == "BOTTOM" else 1
     packed = np.apply_along_axis(pack, axis=axis, arr=board, pack_direction=direction)
     merged = np.apply_along_axis(
