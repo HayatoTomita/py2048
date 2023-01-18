@@ -48,3 +48,17 @@ def test_merge_multi_four_right():
     input_array = np.array([2, 2, 2, 2])
     result_array = np.array([0, 4, 0, 4, 4])
     assert all(board_array.merge(input_array, "RIGHT") == result_array)
+
+
+def test_controll_case_1():
+    input_array = np.array([[8, 0, 0, 0],
+                             [0, 0, 0, 0],
+                             [4, 4, 0, 0],
+                             [0, 0, 0, 0]])
+    result = np.array([[8, 0, 0, 0],
+                       [0, 0, 0, 0],
+                       [8, 0, 0, 0],
+                       [0, 0, 0, 0]])
+    direction = "LEFT"
+    controlled, score, is_continue = board_array.controll(input_array, direction)
+    assert np.allclose(controlled, result) and score == 4 and is_continue == True
