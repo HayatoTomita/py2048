@@ -82,13 +82,22 @@ def get_score(board: np.ndarray, direction: Direction) -> tuple[np.ndarray, int]
     return scored, score
 
 
+def controll(board: np.ndarray, direction: Direction) -> tuple[np.ndarray, int, bool]:
     axis = 0 if direction == "TOP" or direction == "BOTTOM" else 1
-    packed = np.apply_along_axis(pack, axis=axis, arr=board, pack_direction=direction)
-    merged = np.apply_along_axis(
-        merge, axis=axis, arr=packed, merge_direction=direction
+    packed = np.apply_along_axis(
+        pack, axis=axis, arr=board, pack_direction=direction, do_check=True
     )
-    result = np.apply_along_axis(pack, axis=axis, arr=merged, pack_direction=direction)
-    return result
+    checked, is_continue = check_packed_board(packed, direction)
+    merged = np.apply_along_axis(
+        merge, axis=axis, arr=checked, merge_direction=direction
+    )
+    scored, score = get_score(merged, direction)
+    if not is_continue and score == 0:
+        return scored, 0, False
+    result = np.apply_along_axis(
+        pack, axis=axis, arr=scored, pack_direction=direction, do_check=False
+    )
+    return result, score, True
 
 
 def init_board(board_size: int = 4) -> np.ndarray:
