@@ -30,17 +30,20 @@ def pack(
 
 
 def merge(src: np.ndarray, merge_direction: Direction) -> np.ndarray:
+    score = 0
     if merge_direction == "RIGHT" or merge_direction == "BOTTOM":
         src = src[::-1]
 
     for i in range(len(src) - 1):
         if src[i] == src[i + 1]:
+            score += src[i]
             src[i] = src[i] * 2
             src[i + 1] = 0
 
     if merge_direction == "RIGHT" or merge_direction == "BOTTOM":
         src = src[::-1]
 
+    src = np.append(src, score)
     return src
 
 
@@ -64,6 +67,20 @@ def check_packed_board(
         check_array = board[-1, :]
         checked = board[:-1, :]
     return checked, np.sum(check_array) != 0
+
+
+def get_score(board: np.ndarray, direction: Direction) -> tuple[np.ndarray, int]:
+    score = 0
+    if direction == "RIGHT" or direction == "LEFT":
+        scores = board[:, -1]
+        scored = board[:, :-1]
+    elif direction == "TOP" or direction == "BOTTOM":
+        scores = board[-1, :]
+        scored = board[:-1, :]
+
+    score = np.sum(scores)
+    return scored, score
+
 
     axis = 0 if direction == "TOP" or direction == "BOTTOM" else 1
     packed = np.apply_along_axis(pack, axis=axis, arr=board, pack_direction=direction)
