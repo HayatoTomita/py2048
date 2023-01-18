@@ -3,11 +3,14 @@ name = "py2048"
 version = "0.1.0"
 description = "python 2048 game"
 authors = ["HayatoTomita <nice.to.tom@gmail.com>"]
-readme = "README.md"
+packages = [
+    { include = "module", from = "py2048" }
+]
 
 [tool.poetry.dependencies]
 python = "^3.9"
 numpy = "^1.24.1"
+windows-curses = "^2.3.1"
 
 
 [tool.poetry.group.dev.dependencies]
@@ -15,6 +18,7 @@ pytest = "^7.2.0"
 mypy = "^0.991"
 isort = "^5.11.4"
 black = "^22.12.0"
+jupyter = "^1.0.0"
 
 [build-system]
 requires = ["poetry-core"]
