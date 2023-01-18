@@ -62,3 +62,27 @@ def test_controll_case_1():
     direction = "LEFT"
     controlled, score, is_continue = board_array.controll(input_array, direction)
     assert np.allclose(controlled, result) and score == 4 and is_continue == True
+
+def test_game_continue_not_over():
+    input_array = np.array([[4, 2, 4, 2],
+                            [2, 4, 2, 4],
+                            [4, 2, 4, 2],
+                            [2, 4, 4, 2]])
+    is_gameover = board_array.check_game_continue(input_array)
+    assert is_gameover == True
+
+def test_game_continue_with_zero():
+    input_array = np.array([[4, 2, 4, 2],
+                            [2, 4, 2, 4],
+                            [4, 2, 4, 2],
+                            [2, 4, 2, 0]])
+    is_gameover = board_array.check_game_continue(input_array)
+    assert is_gameover == True
+
+def test_game_continue_boardfull():
+    input_array = np.array([[4, 2, 4, 2],
+                            [2, 4, 2, 4],
+                            [4, 2, 4, 2],
+                            [2, 4, 2, 4]])
+    is_gameover = board_array.check_game_continue(input_array)
+    assert is_gameover == True

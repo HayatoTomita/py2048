@@ -106,3 +106,7 @@ def init_board(board_size: int = 4) -> np.ndarray:
     np.random.shuffle(board)
     board = np.reshape(board, (board_size, board_size))
     return board
+
+
+def check_game_continue(board: np.ndarray) -> bool:
+    ...
