@@ -118,7 +118,7 @@ def check_game_continue(board: np.ndarray) -> bool:
     vertical_diff = board[:-1, :] - board[1:, :]
 
     def check_elem_fixed(diff_board: np.ndarray):
-        fixed_elem_array = np.where(horizontal_diff == 0, False, True)
+        fixed_elem_array = np.where(diff_board == 0, False, True)
         return fixed_elem_array.all()
 
     if check_elem_fixed(horizontal_diff) and check_elem_fixed(vertical_diff):
