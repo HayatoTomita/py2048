@@ -68,21 +68,21 @@ def test_game_continue_not_over():
                             [2, 4, 2, 4],
                             [4, 2, 4, 2],
                             [2, 4, 4, 2]])
-    is_gameover = board_array.check_game_continue(input_array)
-    assert is_gameover == True
+    is_continue = board_array.check_game_continue(input_array)
+    assert is_continue == True
 
 def test_game_continue_with_zero():
     input_array = np.array([[4, 2, 4, 2],
                             [2, 4, 2, 4],
                             [4, 2, 4, 2],
                             [2, 4, 2, 0]])
-    is_gameover = board_array.check_game_continue(input_array)
-    assert is_gameover == True
+    is_continue = board_array.check_game_continue(input_array)
+    assert is_continue == True
 
 def test_game_continue_boardfull():
     input_array = np.array([[4, 2, 4, 2],
                             [2, 4, 2, 4],
                             [4, 2, 4, 2],
                             [2, 4, 2, 4]])
-    is_gameover = board_array.check_game_continue(input_array)
-    assert is_gameover == True
+    is_continue = board_array.check_game_continue(input_array)
+    assert is_continue == False
