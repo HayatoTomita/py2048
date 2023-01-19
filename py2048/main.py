@@ -26,6 +26,7 @@ def main(stdscr):
         c = stdscr.getch()
 
         direction: Direction
+        
         if c == ord("w"):
             direction = "TOP"
         elif c == ord("a"):
@@ -34,9 +35,11 @@ def main(stdscr):
             direction = "BOTTOM"
         elif c == ord("d"):
             direction = "RIGHT"
+        else:
+            continue
 
         board, score, is_continue = controll(board, direction)
-        stdscr.addstr(0, 30, "is_continue : {}".format(is_continue))
+        
         if not is_continue:
             continue
 
