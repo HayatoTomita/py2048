@@ -109,4 +109,19 @@ def init_board(board_size: int = 4) -> np.ndarray:
 
 
 def check_game_continue(board: np.ndarray) -> bool:
-    ...
+    nonzero_check = np.where(board != 0, True, False)
+
+    if not nonzero_check.all():
+        return True
+
+    horizontal_diff = board[:, :-1] - board[:, 1:]
+    vertical_diff = board[:-1, :] - board[1:, :]
+
+    def check_elem_fixed(diff_board: np.ndarray):
+        fixed_elem_array = np.where(horizontal_diff == 0, False, True)
+        return fixed_elem_array.all()
+
+    if check_elem_fixed(horizontal_diff) and check_elem_fixed(vertical_diff):
+        return False
+    else:
+        return True
