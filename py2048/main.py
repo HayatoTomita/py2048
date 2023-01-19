@@ -1,7 +1,7 @@
 import curses
 
-from module.board_array import (Direction, controll, get_spawn_idx,
-                                get_spawn_val, init_board, merge, pack)
+from module.board_array import (Direction, check_game_continue, controll,
+                                get_spawn_idx, get_spawn_val, init_board)
 
 
 def main(stdscr):
@@ -12,8 +12,8 @@ def main(stdscr):
     total_score = 0
     turn = 0
     # Clear screen
-    while turn < 10:
-
+    while check_game_continue(board):
+        stdscr.clear()
         stdscr.addstr(0, 0, "Turn : {}".format(turn))
         stdscr.addstr(0, 10, "SCORE : {}".format(total_score))
 
