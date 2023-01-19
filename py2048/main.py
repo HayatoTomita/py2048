@@ -68,6 +68,10 @@ def main(stdscr):
         board[tuple(spawn_idx)] = spawn_val
         turn += 1
 
+    np.savetxt(os.path.join(logdir, "last_board.csv"), board)
+    stdscr.addstr(10, 1, "GAME OVER. PRESS ANY KEY")
+    stdscr.getch()
+    game_history["score"] = total_score
     with open(os.path.join(logdir, "controll_log.json"), "w") as f:
         json.dump(game_history, f, indent=2)
 
